@@ -20,8 +20,9 @@ def validateMatricule(mat):
 def validateCareer(career):
 	# To do:
 	# Look for a JSON or similar file in Database and compare
-	# for an existing instance
-	
+	# for an existing instance or admin a new table in our DB and include 
+	# names manually 
+
 	if len(career) != 3 or len(career) != 4:
 		return False
 	return True
