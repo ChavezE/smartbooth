@@ -7,21 +7,19 @@ from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
 import sys
 import pyrebase
 
+config = {
+    "apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
+    "authDomain": "photoboot-e2b33.firebaseapp.com",
+    "databaseURL": "https://photoboot-e2b33.firebaseio.com",
+    "storageBucket": "photoboot-e2b33.appspot.com",
+}
+
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+
 class Dialog(QDialog):
     def __init__(self):
         super(Dialog, self).__init__()
-        self.config = {
-        "apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
-        "authDomain": "photoboot-e2b33.firebaseapp.com",
-        "databaseURL": "https://photoboot-e2b33.firebaseio.com",
-        #"projectId": "photoboot-e2b33",
-        "storageBucket": "photoboot-e2b33.appspot.com",
-        #"messagingSenderId": "193395117022"
-        }
-
-        self.firebase = pyrebase.initialize_app(self.config)
-        self.db = self.firebase.database()
-        
 
         self.createFormGroupBox()
         
@@ -57,7 +55,8 @@ class Dialog(QDialog):
         print(self.studentId.text())
         print(self.carrera.text())
         data = {"RFID": "00000000", "matricula": self.studentId.text(), "carrera": self.carrera.text()}
-        self.db.child("Students").push(data)
+        db.child("Students").push(data)
+        #print("Find user by RFID")
         #print(self.db.child("Students").order_by_child("RFID").equal_to('A0051212').get().val())
  
  
