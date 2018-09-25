@@ -14,4 +14,3 @@ def scanForRDIF():
 		GPIO.cleanup()
 		
 		return RFID
-

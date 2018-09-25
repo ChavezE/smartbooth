@@ -15,5 +15,14 @@ def validateMatricule(mat):
 	else:
 		return False
 	
-isValid = validateMatricule('00816752')
-print(isValid)
+# isValid = validateMatricule('A00816752')
+
+def validateCareer(career):
+	# To do:
+	# Look for a JSON or similar file in Database and compare
+	# for an existing instance
+	
+	if len(career) != 3 or len(career) != 4:
+		return False
+	return True
+
