@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.uic import loadUi
+from validation import validateMatricule, validateCareer
 import sys
 import pyrebase
 
@@ -23,8 +24,22 @@ class registerWindow(QDialog):
 
 	@pyqtSlot()
 	def registerUsers(self):
+		self.mat_error.setText("")
+		self.car_error.setText("")
 		print(self.studentId.text())
 		print(self.carrera.text())
-		data = {"RFID": "00000000", "matricula": self.studentId.text(), "carrera": self.carrera.text()}
-		db.child("Students").push(data)
+		mat = self.studentId.text()
+		career = self.carrera.text()
+		print("Matricula: ",validateMatricule(mat))
+		print("Carrera: ",validateCareer(career))
+		validateMat = validateMatricule(mat)
+		validateCar = validateCareer(career)
+		if(validateMat and validateCar):
+			data = {"RFID": "00000000", "maatricula": mat, "carrera": career}
+			db.child("Students").push(data)
+		else:
+			if(not(validateMat)):
+				self.mat_error.setText("Matrícula inválida")
+			if(not(validateCar)):
+				self.car_error.setText("Carrera inválida")
 		
