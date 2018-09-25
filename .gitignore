@@ -1,2 +1,5 @@
-*.AppleDouble
-.AppleDouble/*
+# ignore all . files and . folders
+.*
+
+# Dont ignore .gitignore t
+!/.gitignore
