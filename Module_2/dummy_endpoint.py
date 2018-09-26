@@ -24,15 +24,16 @@ db = firebase.database()
 cwd = os.getcwd()
 
 class PhotoMain(QDialog):
-	def __init__(self):
+	def __init__(self, parent):
 		super(PhotoMain, self).__init__()
+		parent.hide()
 		self.load_main_layout()
 
 	def load_main_layout(self):
 		self.cont = 3
 
 		#Carga main layout
-		loadUi("dialog.ui", self)
+		loadUi("../UserExperience/views/dialog.ui", self)
 
 		#Hace que al correr el código, se despliegue el fondo con la cámara
 		self.start_recorder()
@@ -48,7 +49,7 @@ class PhotoMain(QDialog):
 		self.saveBtn.clicked.connect(self.upload_photo)
 
 		#Icono para boton de tomar foto
-		rMyIcon = QtGui.QPixmap("new_photo_icon.png");
+		rMyIcon = QtGui.QPixmap("../UserExperience/img/new_photo_icon.png");
 		self.newPhotoBtn.setIcon(QtGui.QIcon(rMyIcon))
 		self.newPhotoBtn.setIconSize(QSize(65, 65))
 
@@ -58,7 +59,7 @@ class PhotoMain(QDialog):
 		self.newPhotoBtn.setAutoFillBackground(True)
 
 		#Icono para boton de logout
-		rMyIcon = QtGui.QPixmap("logout_icon.png");
+		rMyIcon = QtGui.QPixmap("../UserExperience/img/logout_icon.png");
 		self.logoutBtn.setIcon(QtGui.QIcon(rMyIcon))
 		self.logoutBtn.setIconSize(QSize(50, 50)) 
 
@@ -82,7 +83,7 @@ class PhotoMain(QDialog):
 		self.load_login_layout()
 
 	def load_login_layout(self):
-		loadUi("loginwindow.ui", self)
+		loadUi("../UserExperience/views/loginwindow.ui", self)
 	
 		self.goToMainBtn.clicked.connect(self.load_main_layout)
 
