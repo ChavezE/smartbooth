@@ -19,7 +19,8 @@ class registerWindow(QDialog):
 	def __init__(self, parent):
 		super(registerWindow, self).__init__()
 		loadUi("register.ui", self)
-		self.RFID = parent.rdif
+		self.RFID = parent.rfid
+		print(parent.rfid)
 		self.registerButton.clicked.connect(self.registerUsers)
 		parent.hide()
 

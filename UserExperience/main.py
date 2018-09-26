@@ -28,7 +28,8 @@ class Main(QMainWindow):
 
 	def scanRfid(self):
 		print("scan")
-		rf, self.rdif = scanForRDIF()
+		rf, self.rfid = scanForRDIF()
+		print(self.rfid)
 		register = registerWindow(self)
 		register.exec_()
 
