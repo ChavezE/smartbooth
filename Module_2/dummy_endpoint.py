@@ -4,7 +4,7 @@ import pyrebase
 import os
 import time
 from PyQt5.QtCore import pyqtSlot, QTimer, QSize
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsOpacityEffect
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsOpacityEffect, QDialog
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.uic import loadUi
 from PyQt5 import QtGui, QtCore
@@ -23,16 +23,16 @@ storage = firebase.storage()
 db = firebase.database()
 cwd = os.getcwd()
 
-class Main(QMainWindow):
+class PhotoMain(QDialog):
 	def __init__(self):
-		super(Main, self).__init__()
-		self.load_login_layout()
+		super(PhotoMain, self).__init__()
+		self.load_main_layout()
 
 	def load_main_layout(self):
 		self.cont = 3
 
 		#Carga main layout
-		loadUi("mainwindow.ui", self)
+		loadUi("dialog.ui", self)
 
 		#Hace que al correr el código, se despliegue el fondo con la cámara
 		self.start_recorder()
@@ -185,6 +185,6 @@ class Main(QMainWindow):
 			self.imgLabel.setScaledContents(True)
 
 app = QApplication(sys.argv)
-main = Main()
-main.show()
+photoMain = PhotoMain()
+photoMain.show()
 sys.exit(app.exec())
