@@ -18,7 +18,7 @@ import threading
 
 # Module 2
 sys.path.insert(0, '../Module_2')
-import dummy_endpoint
+from dummy_endpoint import Module_2
 
 config = {
     "apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
@@ -47,16 +47,20 @@ class Main(QMainWindow):
 		self.label.setMovie(movie)
 		movie.start()
 
+
 	def scanRfid(self):
 		print("scan")
 		self.rfid, text = scanForRDIF()
+
 
 		if (not(userExists(self.rfid))):
 			register = registerWindow(self)
 			register.exec_()
 		else:
-			Module_2 = dummy_endpoint.endpoint()
+		# Module_2 = dummy_endpoint.endpoint()
+			module2 = Module_2(self)
 			print(Module_2)
+			module2.exec_()
 
 
 app = QApplication(sys.argv)
