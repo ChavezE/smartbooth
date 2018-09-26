@@ -18,7 +18,7 @@ import threading
 
 # Module 2
 sys.path.insert(0, '../Module_2')
-from dummy_endpoint import Module_2
+from dummy_endpoint import PhotoMain
 
 config = {
     "apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
@@ -58,8 +58,7 @@ class Main(QMainWindow):
 			register.exec_()
 		else:
 		# Module_2 = dummy_endpoint.endpoint()
-			module2 = Module_2(self)
-			print(Module_2)
+			module2 = PhotoMain(self)
 			module2.exec_()
 
 
