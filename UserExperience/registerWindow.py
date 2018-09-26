@@ -19,11 +19,14 @@ class registerWindow(QDialog):
 	def __init__(self, parent):
 		super(registerWindow, self).__init__()
 		loadUi("register.ui", self)
+		self.RFID = parent.rdif
 		self.registerButton.clicked.connect(self.registerUsers)
 		parent.hide()
 
 	@pyqtSlot()
 	def registerUsers(self):
+		print("register")
+		print(self.RFID)
 		self.mat_error.setText("")
 		self.car_error.setText("")
 		print(self.studentId.text())
@@ -35,8 +38,9 @@ class registerWindow(QDialog):
 		validateMat = validateMatricule(mat)
 		validateCar = validateCareer(career)
 		if(validateMat and validateCar):
-			data = {"RFID": "00000000", "maatricula": mat, "carrera": career}
+			data = {"RFID": self.RFID, "maatricula": mat, "carrera": career}
 			db.child("Students").push(data)
+			#to do: mandar a captura
 		else:
 			if(not(validateMat)):
 				self.mat_error.setText("Matrícula inválida")
