@@ -8,9 +8,14 @@ reader = SimpleMFRC522.SimpleMFRC522()
 
 def scanForRDIF():
 	try:
-		_, RFID = reader.read()
+		idd, text = reader.read()
+		
 
 	finally:
 		GPIO.cleanup()
+		return idd, text
 		
-		return RFID
+		
+
+# r, t = scanForRDIF()
+# print(r, t)

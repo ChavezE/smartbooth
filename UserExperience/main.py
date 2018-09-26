@@ -10,26 +10,39 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from registerWindow import registerWindow
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QMovie
+from cardReader import scanForRDIF
+
+import threading 
+
+
 
 class Main(QMainWindow):
 	def __init__(self):
 		super(Main, self).__init__()
 		loadUi("mainwindow.ui", self)
-		self.pushButton.clicked.connect(self.on_button_click)
-		
+
 		movie = QMovie ("welcome.gif")
 		
 		self.label.setMovie(movie)
 		movie.start()
-		
 
-	def on_button_click(self):
+	def scanRfid(self):
+		print("scan")
+		rf, rf2 = scanForRDIF()
 		register = registerWindow(self)
 		register.exec_()
+
 
 app = QApplication(sys.argv)
 main = Main()
 main.show()
+threading.Thread(target=main.scanRfid).start()
+# threading.Thread(target=runReader).start()
+# beginProgram()
+
+
+# main.scanRfid()
+
 sys.exit(app.exec_())
 
 
