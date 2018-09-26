@@ -1,9 +1,20 @@
 import re
+import pyrebase
+
+config = {
+  "apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
+  "authDomain": "photoboot-e2b33.firebaseapp.com",
+  "databaseURL": "https://photoboot-e2b33.firebaseio.com",
+  "storageBucket": "photoboot-e2b33.appspot.com"
+}
+
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
 
 correctMat = '\A(A|a)\d{8}$'
 
 def validateMatricule(mat):
-	
+
 	# size of mat should be fixed to 9 chars
 	if len(mat) != 9:
 		return False
@@ -14,15 +25,25 @@ def validateMatricule(mat):
 		return True
 	else:
 		return False
-	
+
 # isValid = validateMatricule('A00816752')
 
 def validateCareer(career):
-	# To do:
-	# Look for a JSON or similar file in Database and compare
-	# for an existing instance or admin a new table in our DB and include 
-	# names manually 
-	if len(career) == 3 or len(career) == 4:
-		return True
-	return False
+	receivedCareerUpperCase = str(career).upper().strip()
 
+	if not receivedCareerUpperCase:
+		return False;
+
+	all_careers = db.child("careers").get()
+
+	careerNameList = []
+
+	for user in all_careers.each():
+		careerNameList = user.val()
+
+	for careerName in careerNameList:
+		careerNameUpperCase = str(careerName).upper()
+		if careerNameUpperCase == receivedCareerUpperCase:
+			return True
+
+	return False
