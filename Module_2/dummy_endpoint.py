@@ -4,7 +4,7 @@ import pyrebase
 import os
 import time
 from PyQt5.QtCore import pyqtSlot, QTimer, QSize
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsOpacityEffect
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsOpacityEffect, QDialog
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.uic import loadUi
 from PyQt5 import QtGui, QtCore
@@ -23,16 +23,18 @@ storage = firebase.storage()
 db = firebase.database()
 cwd = os.getcwd()
 
-class Main(QMainWindow):
-	def __init__(self):
-		super(Main, self).__init__()
-		self.load_login_layout()
+class Module_2(QDialog):
+	def __init__(self, parent):
+		super(Module_2, self).__init__()
+		parent.hide()
+		self.load_main_layout()
+
 
 	def load_main_layout(self):
 		self.cont = 3
 
 		#Carga main layout
-		loadUi("mainwindow.ui", self)
+		loadUi("../UserExperience/views/cameradialog.ui", self)
 
 		#Hace que al correr el código, se despliegue el fondo con la cámara
 		self.start_recorder()
@@ -48,7 +50,7 @@ class Main(QMainWindow):
 		self.saveBtn.clicked.connect(self.upload_photo)
 
 		#Icono para boton de tomar foto
-		rMyIcon = QtGui.QPixmap("new_photo_icon.png");
+		rMyIcon = QtGui.QPixmap("../UserExperience/img/new_photo_icon.png");
 		self.newPhotoBtn.setIcon(QtGui.QIcon(rMyIcon))
 		self.newPhotoBtn.setIconSize(QSize(65, 65))
 
@@ -58,7 +60,7 @@ class Main(QMainWindow):
 		self.newPhotoBtn.setAutoFillBackground(True)
 
 		#Icono para boton de logout
-		rMyIcon = QtGui.QPixmap("logout_icon.png");
+		rMyIcon = QtGui.QPixmap("../UserExperience/img/logout_icon.png");
 		self.logoutBtn.setIcon(QtGui.QIcon(rMyIcon))
 		self.logoutBtn.setIconSize(QSize(50, 50)) 
 
@@ -82,7 +84,7 @@ class Main(QMainWindow):
 		self.load_login_layout()
 
 	def load_login_layout(self):
-		loadUi("loginwindow.ui", self)
+		loadUi("../UserExperience/views/loginwindow.ui", self)
 	
 		self.goToMainBtn.clicked.connect(self.load_main_layout)
 
@@ -184,7 +186,7 @@ class Main(QMainWindow):
 			self.imgLabel.setPixmap(QPixmap.fromImage(outImage))
 			self.imgLabel.setScaledContents(True)
 
-app = QApplication(sys.argv)
-main = Main()
-main.show()
-sys.exit(app.exec())
+# app = QApplication(sys.argv)
+# main = Main()
+# main.show()
+# sys.exit(app.exec())
