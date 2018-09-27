@@ -6,9 +6,73 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>822</width>
-    <height>583</height>
+    <width>1300</width>
+    <height>700</height>
    </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -51,8 +115,8 @@
   <widget class="QPushButton" name="newPhotoBtn">
    <property name="geometry">
     <rect>
-     <x>134</x>
-     <y>128</y>
+     <x>400</x>
+     <y>190</y>
      <width>500</width>
      <height>120</height>
     </rect>
@@ -65,7 +129,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">background:rgb(109, 169, 225)</string>
    </property>
    <property name="text">
     <string/>
@@ -74,8 +138,8 @@
   <widget class="QPushButton" name="saveBtn">
    <property name="geometry">
     <rect>
-     <x>634</x>
-     <y>458</y>
+     <x>900</x>
+     <y>520</y>
      <width>141</width>
      <height>91</height>
     </rect>
@@ -85,6 +149,9 @@
      <pointsize>18</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background:rgb(109, 169, 225)</string>
+   </property>
    <property name="text">
     <string>Guardar</string>
    </property>
@@ -92,8 +159,8 @@
   <widget class="QLabel" name="imgLabel">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>266</x>
+     <y>62</y>
      <width>791</width>
      <height>571</height>
     </rect>
@@ -105,8 +172,8 @@
   <widget class="QPushButton" name="logoutBtn">
    <property name="geometry">
     <rect>
-     <x>134</x>
-     <y>318</y>
+     <x>400</x>
+     <y>380</y>
      <width>500</width>
      <height>120</height>
     </rect>
@@ -135,8 +202,8 @@
   <widget class="QLabel" name="countdownLabel">
    <property name="geometry">
     <rect>
-     <x>334</x>
-     <y>158</y>
+     <x>600</x>
+     <y>220</y>
      <width>121</width>
      <height>221</height>
     </rect>
@@ -153,8 +220,8 @@
   <widget class="QPushButton" name="cancelBtn">
    <property name="geometry">
     <rect>
-     <x>44</x>
-     <y>458</y>
+     <x>310</x>
+     <y>520</y>
      <width>141</width>
      <height>91</height>
     </rect>
