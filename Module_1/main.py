@@ -21,23 +21,25 @@ sys.path.insert(0, '../Module_2')
 from dummy_endpoint import PhotoMain
 
 config = {
-    "apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
-    "authDomain": "photoboot-e2b33.firebaseapp.com",
-    "databaseURL": "https://photoboot-e2b33.firebaseio.com",
-    "storageBucket": "photoboot-e2b33.appspot.com",
+	"apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
+	"authDomain": "photoboot-e2b33.firebaseapp.com",
+	"databaseURL": "https://photoboot-e2b33.firebaseio.com",
+	"storageBucket": "photoboot-e2b33.appspot.com",
 }
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 def userExists(rfid):
+	mat = 0
 	try:
-		dumy = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get().val()
+		dumy = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get()
 		for i in dumy.each():
-            dumy = i.val()['matricula']
-		return True, dumy
+			mat = i.val()['matricula']
+		return True, mat
+
 	except IndexError:
-		return False
+		return False, mat
 
 class Main(QMainWindow):
 
@@ -61,8 +63,8 @@ class Main(QMainWindow):
 			register = registerWindow(self)
 			register.exec_()
 		else:
-		# Module_2 = dummy_endpoint.endpoint()
 			self.studentId = mat
+			print (self.studentId)
 			module2 = PhotoMain(self)
 			module2.exec_()
 

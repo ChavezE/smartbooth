@@ -21,7 +21,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
 db = firebase.database()
-cwd = os.getcwd()
+cwd = '/home/pi/Desktop/smartbooth/smartbooth/Module_1'
 
 class PhotoMain(QDialog):
 	def __init__(self, parent):
@@ -96,9 +96,11 @@ class PhotoMain(QDialog):
 		self.start_timer()
 
 	def delete_photo(self):
+		self.start_recorder()
 		self.show_main()	
 
 	def upload_photo(self, rfid):
+		print("estoy en upload_photo")
 		photo_name = time.asctime()
 		rfid = "0"
 
@@ -111,7 +113,8 @@ class PhotoMain(QDialog):
 		# Update database with url
 		data = {"url":url}
 		db.child("Students").child(rfid).child("photos").push(data)
-
+		print("voy a start_recorder")
+		self.start_recorder()
 		self.show_main()
 
 	def start_recorder(self):
