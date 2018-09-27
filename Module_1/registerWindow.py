@@ -23,7 +23,7 @@ db = firebase.database()
 class registerWindow(QDialog):
 	def __init__(self, parent):
 		super(registerWindow, self).__init__()
-		loadUi("register.ui", self)
+		loadUi("../UserExperience/views/register.ui", self)
 		self.globalParent = parent
 		self.RFID = parent.rfid
 		print(parent.rfid)
