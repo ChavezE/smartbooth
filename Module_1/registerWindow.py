@@ -39,7 +39,7 @@ class registerWindow(QDialog):
 		validateMat = validateMatricule(mat)
 		validateCar = validateCareer(career)
 		if(validateMat and validateCar):
-			data = {"RFID": self.RFID, "maatricula": mat, "carrera": career}
+			data = {"RFID": self.RFID, "matricula": mat, "carrera": career}
 			db.child("Students").push(data)
 			#to do: mandar a captura
 		else:

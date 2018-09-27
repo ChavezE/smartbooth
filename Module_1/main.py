@@ -34,7 +34,7 @@ def userExists(rfid):
 	try:
 		dumy = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get().val()
 		for i in dumy.each():
-            dumy = i.val()['maatricula']
+            dumy = i.val()['matricula']
 		return True, dumy
 	except IndexError:
 		return False
