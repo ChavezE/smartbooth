@@ -185,7 +185,7 @@ class PhotoMain(QDialog):
 			self.imgLabel.setPixmap(QPixmap.fromImage(outImage))
 			self.imgLabel.setScaledContents(True)
 
-app = QApplication(sys.argv)
-photoMain = PhotoMain()
-photoMain.show()
-sys.exit(app.exec())
+#app = QApplication(sys.argv)
+#photoMain = PhotoMain()
+#photoMain.show()
+#sys.exit(app.exec())

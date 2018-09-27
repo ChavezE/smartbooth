@@ -5,7 +5,7 @@
 
 import sys
 
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import (pyqtSlot, pyqtSignal)
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from registerWindow import registerWindow
 from PyQt5.uic import loadUi
@@ -38,6 +38,9 @@ def userExists(rfid):
 		return False
 
 class Main(QMainWindow):
+
+	scanRDIFE = pyqtSignal(str, name="scanRDIFE")
+
 	def __init__(self):
 		super(Main, self).__init__()
 		loadUi("../UserExperience/views/mainwindow.ui", self)
@@ -46,14 +49,12 @@ class Main(QMainWindow):
 		self.rfid = 0
 		self.label.setMovie(movie)
 		movie.start()
+		self.scanRDIFE.connect(self.onSuccessRead)
 
-
-	def scanRfid(self):
-		print("scan")
-		self.rfid, text = scanForRDIF()
-
-
-		if (not(userExists(self.rfid))):
+	@pyqtSlot(str)
+	def onSuccessRead(self, id):
+		print(id)
+		if (not(userExists(id))):
 			register = registerWindow(self)
 			register.exec_()
 		else:
@@ -61,12 +62,22 @@ class Main(QMainWindow):
 			module2 = PhotoMain(self)
 			module2.exec_()
 
+	def scanRfid(self):
+		print("scan")
+		self.rfid, text = scanForRDIF()
+		print("readed")
+		self.scanRDIFE.emit(self.rfid)
+		print("emited")
+
+
+		
+
 
 app = QApplication(sys.argv)
 main = Main()
 main.show()
-threading.Thread(target=main.scanRfid).start()
 
+threading.Thread(target=main.scanRfid).start()
 
 sys.exit(app.exec_())
 
