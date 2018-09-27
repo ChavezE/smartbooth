@@ -32,13 +32,19 @@ db = firebase.database()
 
 def userExists(rfid):
 	mat = 0
+	students = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get()
 	try:
-		dumy = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get()
-		for i in dumy.each():
-			mat = i.val()['matricula']
+		students_values = students.val()
+
+		for i in students_values:
+			# this retrieves the key
+			mat = i
+
+		print ("User does exists")
 		return True, mat
 
 	except IndexError:
+		print ("User does not exists")
 		return False, mat
 
 class Main(QMainWindow):
@@ -63,9 +69,7 @@ class Main(QMainWindow):
 			register = registerWindow(self)
 			register.exec_()
 		else:
-			self.studentId = mat
-			print (self.studentId)
-			module2 = PhotoMain(self)
+			module2 = PhotoMain(self, mat)
 			module2.exec_()
 
 	def scanRfid(self):

@@ -12,11 +12,11 @@ from PyQt5 import QtGui, QtCore
 photo = '/photo.png'
 
 config = {
-		  "apiKey": "AIzaSyDjzjDqMsLJGsPQ6EZQOANkWXbDBCfT3nU",
-		  "authDomain": "photobooth-c45c0.firebaseapp.com",
-		  "databaseURL": "https://photobooth-c45c0.firebaseio.com/",
-		  "storageBucket": "photobooth-c45c0.appspot.com"
-		}
+	"apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
+	"authDomain": "photoboot-e2b33.firebaseapp.com",
+	"databaseURL": "https://photoboot-e2b33.firebaseio.com",
+	"storageBucket": "photoboot-e2b33.appspot.com",
+}
 
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
@@ -24,9 +24,10 @@ db = firebase.database()
 cwd = '/home/pi/Desktop/smartbooth/smartbooth/Module_1'
 
 class PhotoMain(QDialog):
-	def __init__(self, parent):
+	def __init__(self, parent, mat):
 		super(PhotoMain, self).__init__()
 		parent.hide()
+		self.studentID_mat = mat
 		self.load_main_layout()
 
 	def load_main_layout(self):
@@ -99,20 +100,21 @@ class PhotoMain(QDialog):
 		self.start_recorder()
 		self.show_main()	
 
-	def upload_photo(self, rfid):
+	def upload_photo(self):
+		mat = self.studentID_mat
 		print("estoy en upload_photo")
 		photo_name = time.asctime()
-		rfid = "0"
+		
 
 		# Upload photo in firebase storage
-		storage.child("images/" + rfid + "/" + photo_name).put(cwd + photo)
+		storage.child("images/" + mat + "/" + photo_name).put(cwd + photo)
 
 		# Get url from  given image firebase storage
-		url = storage.child("images/" + rfid + "/" + photo_name).get_url(None)
+		url = storage.child("images/" + mat + "/" + photo_name).get_url(None)
 
 		# Update database with url
 		data = {"url":url}
-		db.child("Students").child(rfid).child("photos").push(data)
+		db.child("Students").child(mat).child("photos").push(data)
 		print("voy a start_recorder")
 		self.start_recorder()
 		self.show_main()
