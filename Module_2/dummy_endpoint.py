@@ -23,10 +23,13 @@ storage = firebase.storage()
 db = firebase.database()
 cwd = '/home/pi/Desktop/smartbooth/smartbooth/Module_1'
 
+globalParent = ""
+
 class PhotoMain(QDialog):
 	def __init__(self, parent, mat):
 		super(PhotoMain, self).__init__()
-		parent.hide()
+		self.globalParent = parent
+		self.globalParent.hide()
 		self.studentID_mat = mat
 		self.load_main_layout()
 
@@ -84,9 +87,9 @@ class PhotoMain(QDialog):
 		self.load_login_layout()
 
 	def load_login_layout(self):
-		loadUi("../UserExperience/views/loginwindow.ui", self)
-	
-		self.goToMainBtn.clicked.connect(self.load_main_layout)
+		self.close()
+		self.globalParent.show()
+		self.globalParent.initialize_reader()
 
 	def update_frame(self):
 		ret, self.image=self.capture.read()

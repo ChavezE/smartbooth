@@ -79,15 +79,15 @@ class Main(QMainWindow):
 		self.scanRDIFE.emit(str(self.rfid))
 		print("emited")
 
-
+	def initialize_reader(self):
+		threading.Thread(target=main.scanRfid).start()
 		
 
 
 app = QApplication(sys.argv)
 main = Main()
 main.show()
-
-threading.Thread(target=main.scanRfid).start()
+main.initialize_reader()
 
 sys.exit(app.exec_())
 

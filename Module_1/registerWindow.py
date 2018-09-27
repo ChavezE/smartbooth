@@ -4,6 +4,7 @@ from PyQt5.uic import loadUi
 from validation import validateMatricule, validateCareer
 import sys
 import pyrebase
+import threading 
 
 # Module 2
 sys.path.insert(0, '../Module_2')
@@ -23,11 +24,15 @@ class registerWindow(QDialog):
 	def __init__(self, parent):
 		super(registerWindow, self).__init__()
 		loadUi("register.ui", self)
+		self.globalParent = parent
 		self.RFID = parent.rfid
 		print(parent.rfid)
 		self.registerButton.clicked.connect(self.registerUsers)
 		parent.hide()
 
+	def initialize_reader(self):
+		self.globalParent.show()
+		threading.Thread(target=self.globalParent.scanRfid).start()
 
 	@pyqtSlot()
 	def registerUsers(self):
