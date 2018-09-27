@@ -81,10 +81,10 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>160</y>
-      <width>651</width>
-      <height>241</height>
+      <x>10</x>
+      <y>10</y>
+      <width>1271</width>
+      <height>621</height>
      </rect>
     </property>
     <property name="palette">
