@@ -23,10 +23,13 @@ storage = firebase.storage()
 db = firebase.database()
 cwd = os.getcwd()
 
+globalParent = ""
+
 class PhotoMain(QDialog):
 	def __init__(self, parent):
 		super(PhotoMain, self).__init__()
-		parent.hide()
+		self.globalParent = parent
+		self.globalParent.hide()
 		self.load_main_layout()
 
 	def load_main_layout(self):
@@ -83,9 +86,11 @@ class PhotoMain(QDialog):
 		self.load_login_layout()
 
 	def load_login_layout(self):
-		loadUi("../UserExperience/views/loginwindow.ui", self)
+		self.globalParent.show()
+		self.close()
+		# loadUi("../UserExperience/views/loginwindow.ui", self)
 	
-		self.goToMainBtn.clicked.connect(self.load_main_layout)
+		# self.goToMainBtn.clicked.connect(self.load_main_layout)
 
 	def update_frame(self):
 		ret, self.image=self.capture.read()
