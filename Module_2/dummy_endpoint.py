@@ -23,18 +23,17 @@ storage = firebase.storage()
 db = firebase.database()
 cwd = os.getcwd()
 
-class Module_2(QDialog):
+class PhotoMain(QDialog):
 	def __init__(self, parent):
-		super(Module_2, self).__init__()
+		super(PhotoMain, self).__init__()
 		parent.hide()
 		self.load_main_layout()
-
 
 	def load_main_layout(self):
 		self.cont = 3
 
 		#Carga main layout
-		loadUi("../UserExperience/views/cameradialog.ui", self)
+		loadUi("../UserExperience/views/dialog.ui", self)
 
 		#Hace que al correr el código, se despliegue el fondo con la cámara
 		self.start_recorder()
@@ -186,7 +185,7 @@ class Module_2(QDialog):
 			self.imgLabel.setPixmap(QPixmap.fromImage(outImage))
 			self.imgLabel.setScaledContents(True)
 
-# app = QApplication(sys.argv)
-# main = Main()
-# main.show()
-# sys.exit(app.exec())
+#app = QApplication(sys.argv)
+#photoMain = PhotoMain()
+#photoMain.show()
+#sys.exit(app.exec())

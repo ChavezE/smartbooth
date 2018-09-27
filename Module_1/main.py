@@ -5,7 +5,7 @@
 
 import sys
 
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import (pyqtSlot, pyqtSignal)
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from registerWindow import registerWindow
 from PyQt5.uic import loadUi
@@ -18,7 +18,7 @@ import threading
 
 # Module 2
 sys.path.insert(0, '../Module_2')
-from dummy_endpoint import Module_2
+from dummy_endpoint import PhotoMain
 
 config = {
     "apiKey": "AIzaSyAq9xA-sjwtOmye3j_xzURxacHP6qknLOg",
@@ -32,12 +32,15 @@ db = firebase.database()
 
 def userExists(rfid):
 	try:
-		dumy = db.child("Students").order_by_child("RFID").equal_to(rfid).get().val()
+		dumy = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get().val()
 		return True
 	except IndexError:
 		return False
 
 class Main(QMainWindow):
+
+	scanRDIFE = pyqtSignal(str, name="scanRDIFE")
+
 	def __init__(self):
 		super(Main, self).__init__()
 		loadUi("../UserExperience/views/mainwindow.ui", self)
@@ -46,26 +49,32 @@ class Main(QMainWindow):
 		self.rfid = 0
 		self.label.setMovie(movie)
 		movie.start()
+		self.scanRDIFE.connect(self.onSuccessRead)
 
+	@pyqtSlot(str)
+	def onSuccessRead(self, id):
+		print(id)
+		if (not(userExists(id))):
+			register = registerWindow(self)
+			register.exec_()
+		else:
+		# Module_2 = dummy_endpoint.endpoint()
+			module2 = PhotoMain(self)
+			module2.exec_()
 
 	def scanRfid(self):
 		print("scan")
 		#self.rfid, text = scanForRDIF()
 		self.rfid = 1000
-		if (not(userExists(self.rfid))):
-			register = registerWindow(self)
-			register.exec_()
-		else:
-		# Module_2 = dummy_endpoint.endpoint()
-			module2 = Module_2(self)
-			print(Module_2)
-			module2.exec_()		
-			
+		print("readed")
+		self.scanRDIFE.emit(str(self.rfid))
+		print("emited")
+
 app = QApplication(sys.argv)
 main = Main()
 main.show()
-threading.Thread(target=main.scanRfid).start()
 
+threading.Thread(target=main.scanRfid).start()
 
 sys.exit(app.exec_())
 
