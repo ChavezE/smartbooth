@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from registerWindow import registerWindow
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QMovie
-from cardReader import scanForRDIF
+# from cardReader import scanForRDIF
 
 import pyrebase
 
@@ -50,9 +50,8 @@ class Main(QMainWindow):
 
 	def scanRfid(self):
 		print("scan")
-		self.rfid, text = scanForRDIF()
-
-
+		#self.rfid, text = scanForRDIF()
+		self.rfid = 1000
 		if (not(userExists(self.rfid))):
 			register = registerWindow(self)
 			register.exec_()
@@ -60,9 +59,8 @@ class Main(QMainWindow):
 		# Module_2 = dummy_endpoint.endpoint()
 			module2 = Module_2(self)
 			print(Module_2)
-			module2.exec_()
-
-
+			module2.exec_()		
+			
 app = QApplication(sys.argv)
 main = Main()
 main.show()
