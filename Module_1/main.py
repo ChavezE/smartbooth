@@ -32,7 +32,7 @@ db = firebase.database()
 
 def userExists(rfid):
 	try:
-		dumy = db.child("Students").order_by_child("RFID").equal_to(rfid).get().val()
+		dumy = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get().val()
 		return True
 	except IndexError:
 		return False
@@ -66,7 +66,7 @@ class Main(QMainWindow):
 		print("scan")
 		self.rfid, text = scanForRDIF()
 		print("readed")
-		self.scanRDIFE.emit(self.rfid)
+		self.scanRDIFE.emit(str(self.rfid))
 		print("emited")
 
 
