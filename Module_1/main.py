@@ -33,7 +33,9 @@ db = firebase.database()
 def userExists(rfid):
 	try:
 		dumy = db.child("Students").order_by_child("RFID").equal_to(int(rfid)).get().val()
-		return True
+		for i in dumy.each():
+            dumy = i.val()['maatricula']
+		return True, dumy
 	except IndexError:
 		return False
 
@@ -54,11 +56,13 @@ class Main(QMainWindow):
 	@pyqtSlot(str)
 	def onSuccessRead(self, id):
 		print(id)
-		if (not(userExists(id))):
+		check, mat = userExists(id)
+		if (not(check)):
 			register = registerWindow(self)
 			register.exec_()
 		else:
 		# Module_2 = dummy_endpoint.endpoint()
+			self.studentId = mat
 			module2 = PhotoMain(self)
 			module2.exec_()
 
