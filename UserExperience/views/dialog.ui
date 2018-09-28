@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
-    <height>700</height>
+    <width>1020</width>
+    <height>760</height>
    </rect>
   </property>
   <property name="palette">
@@ -115,8 +115,8 @@
   <widget class="QPushButton" name="newPhotoBtn">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>130</y>
+     <x>240</x>
+     <y>140</y>
      <width>500</width>
      <height>120</height>
     </rect>
@@ -138,8 +138,8 @@
   <widget class="QPushButton" name="saveBtn">
    <property name="geometry">
     <rect>
-     <x>900</x>
-     <y>460</y>
+     <x>740</x>
+     <y>470</y>
      <width>141</width>
      <height>91</height>
     </rect>
@@ -159,8 +159,8 @@
   <widget class="QLabel" name="imgLabel">
    <property name="geometry">
     <rect>
-     <x>266</x>
-     <y>2</y>
+     <x>106</x>
+     <y>12</y>
      <width>791</width>
      <height>571</height>
     </rect>
@@ -172,8 +172,8 @@
   <widget class="QPushButton" name="logoutBtn">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>320</y>
+     <x>240</x>
+     <y>330</y>
      <width>500</width>
      <height>120</height>
     </rect>
@@ -202,8 +202,8 @@
   <widget class="QLabel" name="countdownLabel">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>160</y>
+     <x>440</x>
+     <y>170</y>
      <width>121</width>
      <height>221</height>
     </rect>
@@ -220,8 +220,8 @@
   <widget class="QPushButton" name="cancelBtn">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>460</y>
+     <x>150</x>
+     <y>470</y>
      <width>141</width>
      <height>91</height>
     </rect>
